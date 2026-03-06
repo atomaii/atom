@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Атом</title>
+    <meta name="description" content="Автоматизация, устранение хаоса, создание систем роста. Интернет-магазины, Telegram-решения, AI-ассистенты, 3D-дизайн.">
+    <meta name="keywords" content="автоматизация бизнеса, создание интернет-магазинов, Telegram боты, AI ассистенты, 3D логотипы, воронки продаж">
+    <!-- Preconnect и шрифт Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="ico/lofo-mini.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200;14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- СБРОС И БАЗОВЫЕ СТИЛИ ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ---------- КОНТЕЙНЕР ---------- */
+        .atom-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+        @media (max-width: 1024px) {
+            .atom-container { padding: 0 30px; }
+        }
+        @media (max-width: 768px) {
+            .atom-container { padding: 0 20px; }
+        }
+
+        /* ---------- ШАПКА ---------- */
+        .atom-header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s ease;
+            transform: translateY(0);
+        }
+        .atom-header--hidden {
+            transform: translateY(-100%) !important;
+        }
+       
+        .atom-header .atom-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-left: 20px;
+            padding-right: 60px;
+            
+        }
+        @media (max-width: 1024px) {
+            .atom-header .atom-container {
+                padding-right: 30px;
+            }
+        }
+        @media (max-width: 768px) {
+            .atom-header .atom-container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+        .atom-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #fff;
+            text-decoration: none;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            height: 100%; 
+        }
+        .atom-logo img{
+            max-height: 35px;
+            width: auto;
+            display: block;
+        }
+        .atom-nav {
+            display: flex;
+            gap: 30px;
+            margin-left: auto;
+        }
+        .atom-nav__link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 8px 0 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+        .atom-nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+        .atom-nav__link:hover::after {
+            width: 100%;
+        }
+        .atom-nav__link:hover {
+            color: #fff;
+        }
+
+        /* Бургер-меню */
+        .atom-burger-checkbox {
+            display: none;
+        }
+        .atom-burger-icon {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+            z-index: 200;
+        }
+        .atom-burger-icon span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background: #fff;
+            transition: all 0.3s;
+        }
+        @media (max-width: 1024px) {
+            .atom-nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 400px;
+                height: 100vh;
+                background: rgba(0,0,0,0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                transition: right 0.4s ease;
+                z-index: 150;
+                border-left: 1px solid #222;
+            }
+            .atom-burger-icon {
+                display: flex;
+            }
+            .atom-burger-checkbox:checked ~ .atom-nav {
+                right: 0;
+            }
+            .atom-burger-checkbox:checked + .atom-burger-icon span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+            .atom-burger-checkbox:checked + .atom-burger-icon span:nth-child(2) {
+                opacity: 0;
+            }
+            .atom-burger-checkbox:checked + .atom-burger-icon span:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+        }
+
+        /* ---------- АНИМАЦИЯ ПОЯВЛЕНИЯ ---------- */
+        .atom-fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .atom-fade-up--visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .atom-delay-1 { transition-delay: 0.1s; }
+        .atom-delay-2 { transition-delay: 0.2s; }
+        .atom-delay-3 { transition-delay: 0.3s; }
+
+        /* ---------- HERO НА ГЛАВНОЙ (ВИДЕО-ФОН) ---------- */
+        .atom-hero {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            margin-bottom: 100px;
+            overflow: hidden;
+        }
+        .atom-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to bottom, transparent 0%, #000 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .atom-hero__video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(1.7);
+            
+        }
+        .atom-hero__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: -1;
+        }
+        .atom-hero__content {
+            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+            filter: brightness(2.5);
+        }
+        .atom-hero__title {
+            font-size: clamp(2.8rem, 12vw, 8rem);
+            font-weight: 700;
+            line-height: 0.95;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .atom-hero__line1 {
+            display: block;
+            font-weight: 600;
+        }
+        .atom-hero__sub {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #aaa;
+        }
+        @media (max-width: 768px) {
+            .atom-hero {
+                min-height: 60vh;
+            }
+        }
+
+        /* ---------- БЛОК РЕШЕНИЯ ПРОБЛЕМЫ ---------- */
+        .atom-problem {
+            margin-bottom: 140px;
+            
+            padding-left: 30px;
+            max-width: 900px;
+        }
+        .atom-problem__text {
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 300;
+            animation: slideUp 1s ease forwards;
+        }
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ---------- УСЛУГИ ---------- */
+        .atom-services {
+            margin-bottom: 140px;
+        }
+        .atom-section-heading {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: 50px;
+            letter-spacing: -0.02em;
+        }
+        .atom-section-heading__accent {
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+        .atom-services__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .atom-service-card {
+            background: #0a0a0a;
+            padding: 40px 30px;
+            border: 1px solid #222;
+            transition: box-shadow 0.3s ease, border-color 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .atom-service-card:hover {
+            border-color: #444;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+        .atom-service-card__title {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        .atom-service-card__desc {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #aaa;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex: 1;
+        }
+        .atom-service-card__price {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: 0.02em;
+        }
+        .atom-btn {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 12px 30px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            border-radius: 0;
+            min-height: 44px;
+            line-height: 1.2;
+            align-self: flex-start;
+            margin-top: auto;
+        }
+        .atom-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+        @media (max-width: 1024px) {
+            .atom-services__grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .atom-services__grid { grid-template-columns: 1fr; }
+        }
+
+        /* ---------- КЕЙСЫ ---------- */
+        .atom-cases {
+            margin-bottom: 140px;
+        }
+        .atom-cases__grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        .atom-case-card {
+            background: #111;
+            border: 1px solid #222;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .atom-case-card:hover {
+            transform: scale(1.02);
+        }
+        .atom-case-card__img {
+            width: 100%;
+            height: 200px;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        .atom-case-card__img svg {
+            opacity: 0.3;
+        }
+        .atom-case-card__content {
+            padding: 25px;
+        }
+        .atom-case-card__title {
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+        .atom-case-card__task,
+        .atom-case-card__solution,
+        .atom-case-card__result {
+            font-size: 0.95rem;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        .atom-case-card__result {
+            color: #fff;
+            font-weight: 400;
+        }
+        @media (max-width: 768px) {
+            .atom-cases__grid { grid-template-columns: 1fr; }
+        }
+
+        /* ---------- ОТЗЫВЫ С АВАТАРКАМИ ---------- */
+        .atom-testimonials {
+            margin-bottom: 140px;
+        }
+        .atom-testimonials__grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        .atom-testimonial {
+            border-left: 2px solid #333;
+            padding-left: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        .atom-testimonial__header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .atom-testimonial__avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: 500;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        .atom-testimonial__info {
+            display: flex;
+            flex-direction: column;
+        }
+        .atom-testimonial__author {
+            font-weight: 400;
+            color: #ccc;
+        }
+        .atom-testimonial__company {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .atom-testimonial__text {
+            font-size: 1.2rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .atom-testimonials__grid { grid-template-columns: 1fr; }
+        }
+
+        /* ---------- CTA ---------- */
+        .atom-cta {
+            margin-bottom: 120px;
+            text-align: center;
+        }
+        .atom-cta__title {
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+        .atom-cta .atom-btn {
+            padding: 15px 50px;
+            font-size: 1rem;
+        }
+
+        /* ---------- ПОДВАЛ ---------- */
+        .atom-footer {
+            border-top: 1px solid #222;
+            padding: 60px 0 30px;
+        }
+        .atom-footer .atom-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+        .atom-footer__logo img {
+            height: 40px;
+            display: flex;
+        }
+        .atom-footer__social {
+            display: flex;
+            gap: 20px;
+        }
+        .atom-footer__social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #222;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        .atom-footer__social-link:hover {
+            background: #444;
+        }
+        .atom-footer__social-link svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
+        .atom-footer__copy {
+            width: 100%;
+            text-align: center;
+            margin-top: 40px;
+            color: #555;
+            font-size: 0.8rem;
+        }
+        .kontaktu-footer{
+            display: flex;
+            color:#4e4e4e;
+        }
+
+        /* ---------- СТРАНИЦЫ УСЛУГ ---------- */
+        .atom-page {
+            display: none;
+            min-height: 100vh;
+            position: relative;
+        }
+        .atom-page--active {
+            display: block;
+        }
+        .atom-main-content {
+            display: block;
+        }
+        .atom-main-content--hidden {
+            display: none;
+        }
+
+        /* Видео-фон на странице услуги */
+        .atom-page-hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        .atom-page-hero__video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .atom-page-hero__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+        .atom-page-hero__content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+            color: #fff;
+            text-align: center;
+            pointer-events: none; /* чтобы клики проходили сквозь, кроме навигации */
+        }
+        .atom-page-hero__nav {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            pointer-events: auto;
+        }
+        .atom-page-hero__title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0 20px;
+            text-shadow: 0 0 20px rgba(0,0,0,0.7);
+            pointer-events: auto;
+        }
+        /* Градиентный переход от видео к контенту */
+        .atom-page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to bottom, transparent 0%, #000 100%);
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        /* Плавающие картинки */
+        .atom-page__floating-images {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70vh; /* совпадает с высотой hero */
+            pointer-events: none;
+            z-index: 5;
+            overflow: visible;
+        }
+        .floating-img {
+            position: absolute;
+            width: 200px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+            opacity: 0.8;
+            will-change: transform;
+            filter: brightness(0.9) contrast(1.1);
+        }
+        .img1 {
+            top: 15%;
+            left: 2%;
+            animation: float1 18s infinite alternate ease-in-out;
+        }
+        .img2 {
+            bottom: 10%;
+            right: 2%;
+            width: 250px;
+            animation: float2 22s infinite alternate ease-in-out;
+        }
+        .img3 {
+            top: 30%;
+            right: 10%;
+            width: 180px;
+            animation: float3 20s infinite alternate ease-in-out;
+        }
+        @keyframes float1 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(30px, -25px) rotate(5deg); }
+            100% { transform: translate(-20px, 30px) rotate(-3deg); }
+        }
+        @keyframes float2 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-40px, 20px) rotate(-8deg); }
+            66% { transform: translate(20px, -30px) rotate(4deg); }
+            100% { transform: translate(10px, 15px) rotate(-2deg); }
+        }
+        @keyframes float3 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(25px, -40px) rotate(10deg); }
+            50% { transform: translate(-30px, 20px) rotate(-5deg); }
+            75% { transform: translate(10px, 30px) rotate(3deg); }
+            100% { transform: translate(-15px, -10px) rotate(-1deg); }
+        }
+
+        /* Контент страницы услуги */
+        .atom-page__content {
+            position: relative;
+            z-index: 6;
+            background: #000;
+            padding: 40px 0;
+        }
+        .atom-page__section {
+            margin-bottom: 40px;
+        }
+        .atom-page__section-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+        .atom-page__text {
+            font-size: 1.2rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        .atom-page__price {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 20px;
+        }
+        .atom-modal__stage-list {
+            list-style: none;
+        }
+        .atom-modal__stage-item {
+            font-size: 1.1rem;
+            font-weight: 300;
+            padding: 8px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        /* ---------- ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ ДЛЯ МАЛЕНЬКИХ ЭКРАНОВ ---------- */
+        @media (max-width: 480px) {
+            .atom-hero__title {
+                font-size: clamp(2.2rem, 10vw, 3rem);
+            }
+            .atom-service-card {
+                padding: 30px 20px;
+            }
+            .atom-service-card__title {
+                font-size: 1.6rem;
+            }
+            .atom-service-card__desc {
+                font-size: 0.95rem;
+            }
+            .atom-btn {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+                width: 100%;
+                text-align: center;
+            }
+            .atom-case-card__content {
+                padding: 20px;
+            }
+            .atom-case-card__title {
+                font-size: 1.4rem;
+            }
+            .atom-testimonial {
+                padding-left: 20px;
+            }
+            .atom-testimonial__text {
+                font-size: 1rem;
+            }
+            .atom-footer .atom-container {
+                gap: 20px;
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+            }
+            .atom-footer__social {
+                align-self: flex-end;
+                display: flex;
+            }
+            .atom-page-hero {
+                height: 50vh;
+            }
+            .atom-page-hero__title {
+                font-size: 2rem;
+            }
+            .floating-img {
+                width: 120px;
+            }
+            .img2 {
+                width: 150px;
+            }
+            .img3 {
+                width: 100px;
+            }
+        }
+
+        html, body {
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="atom-header" id="atom-header">
+        <div class="atom-container">
+            <div class="atom-logo"><img src="./logo-Photoroom.png" alt="Атом"></div>
+            <input type="checkbox" id="atom-burger" class="atom-burger-checkbox">
+            <label for="atom-burger" class="atom-burger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <nav class="atom-nav">
+                <a href="#atom-services" class="atom-nav__link">Услуги</a>
+                <a href="#atom-cases" class="atom-nav__link">Кейсы</a>
+                <a href="#atom-footer" class="atom-nav__link">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Главный контент -->
+        <div class="atom-main-content" id="atom-main-content">
+            <!-- Hero -->
+            <section class="atom-hero">
+                <video class="atom-hero__video" autoplay loop muted playsinline>
+                    <source src="./video/video_s.mp4" type="video/mp4">
+                    <img src="https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Background" style="object-fit: cover; width:100%; height:100%;">
+                </video>
+                <div class="atom-hero__overlay"></div>
+                <div class="atom-container atom-hero__content">
+                    <h1 class="atom-hero__title atom-fade-up atom-fade-up--visible">
+                        <span class="atom-hero__line1">Технологии роста для вашего бренда</span>
+                    </h1>
+                    <div class="atom-hero__sub atom-fade-up atom-fade-up--visible atom-delay-1">Digital-агентство полного цикла</div>
+                </div>
+            </section>
+
+            <!-- Блок решения проблемы -->
+            <section class="atom-container atom-problem atom-fade-up" id="atom-problem">
+                <p class="atom-problem__text">Автоматизируем процессы, c помощью современных инструментов</p>
+            </section>
+
+            <!-- Услуги -->
+            <section class="atom-container atom-services" id="atom-services">
+                <h2 class="atom-section-heading atom-fade-up"><span class="atom-section-heading__accent">Услуги</span></h2>
+                <div class="atom-services__grid" id="atom-services-grid"></div>
+            </section>
+
+            <!-- Кейсы -->
+            <section class="atom-container atom-cases" id="atom-cases">
+                <h2 class="atom-section-heading atom-fade-up"><span class="atom-section-heading__accent">Кейсы</span></h2>
+                <div class="atom-cases__grid" id="atom-cases-grid"></div>
+            </section>
+
+            <!-- CTA -->
+            <section class="atom-container atom-cta atom-fade-up">
+                <h2 class="atom-cta__title">Обсудить проект</h2>
+                <a href="#atom-footer" class="atom-btn">Вперед</a>
+            </section>
+        </div>
+
+        <!-- Страницы услуг будут вставлены сюда скриптом -->
+        <div id="atom-pages-container"></div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="atom-footer" id="atom-footer">
+        <div class="atom-container">
+            <div class="atom-footer__logo"><img src="logo-Photoroom.png" alt="Атом"></div> 
+            <div class="atom-footer__social">         
+                <a href="#" class="atom-footer__social-link" target="_blank" aria-label="Telegram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.2-.04-.28-.02-.12.02-2.08 1.32-2.94 1.87-.28.18-.78.43-1.12.42-.33-.01-1.08-.21-1.61-.38-.66-.21-1.18-.32-1.14-.68.02-.19.22-.38.61-.57 2.27-1 3.96-1.66 5.07-2.02 2.39-.78 2.89-.91 3.21-.91.22 0 .52.05.66.2.12.12.15.28.13.45z"/></svg>
+                </a>
+                <a href="#" class="atom-footer__social-link" target="_blank" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.509.5.902 1.105 1.153 1.772.248.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.217 1.79-.465 2.428a4.89 4.89 0 0 1-1.153 1.772c-.5.509-1.105.902-1.772 1.153-.637.248-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.217-2.428-.465a4.89 4.89 0 0 1-1.772-1.153c-.509-.5-.902-1.105-1.153-1.772-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.065.217-1.79.465-2.428a4.89 4.89 0 0 1 1.153-1.772c.5-.509 1.105-.902 1.772-1.153.637-.248 1.363-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 1 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+                </a>
+            </div>
+            <div class="atom-footer__copy">
+                © 2026 Атом. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            // Данные услуг с ценами
+            const servicesData = [
+                {
+                    id: 'shop',
+                    title: 'Сайты',
+                    desc: 'Многостраничные, одностраничные сайты и визитки с высокой конверсией',
+                    price: 'от 8 000р',
+                    stages: ['✓ Анализ ниши и конкурентов', '✓ Прототипирование и дизайн', '✓ Интеграция с CRM и платежными системами', '✓ Тестирование и запуск'],
+                    result: 'Вы получаете готовый сайт приносящий постоянный поток заявок, с постоянной поддержкой и SEO продвижением',
+                    duration: 'от 2 дней до 2 недель',
+                    fullDesc: 'Создадим и разработаем стильный премиальный сайт под ваш стиль. Используем проверенные решения для увеличения конверсии и автоматизации продаж'
+                },
+                {
+                    id: 'tma',
+                    title: 'Мини-приложения в Telegram',
+                    desc: 'Приложения внутри Telegram. Быстрота в использовании',
+                    price: 'от 7 000р',
+                    stages: ['✓ Разработка фирменного стиля', '✓ Интеграция с ботами и базами данных', '✓ Публикация и аналитика'],
+                    result: 'Мини-приложение с плавным UI и бесшовной авторизацией. Рост вовлечённости.',
+                    duration: 'от 3 до 7 дней',
+                    fullDesc: 'Мини-приложения в Telegram с мгновенной скорость загрузик и не требующей установки. Идеальный путь для вашего клиента'
+                },
+                {
+                    id: 'bot',
+                    title: 'Боты в Telegram',
+                    desc: 'Автоматические воронки продаж, квалификация лидов, рассылки.',
+                    price: 'от 5 000р',
+                    stages: ['✓ Разработка стратегии воронки продаж', '✓ Анализ портрета ЦА', '✓ Разработка бота', '✓ Настройка платежей и форм','✓ Многоповторные сообщения'],
+                    result: 'Бот, который самостоятельно ведёт клиента от первого касания до покупки',
+                    duration: 'от 1 до 4 дней',
+                    fullDesc: 'Автоматизируйте продажи в Telegram с помощью ботов, которые квалифицируют лидов и отправляют целевые предложения.'
+                },
+                {
+                    id: 'funnel',
+                    title: 'Воронки продаж',
+                    desc: 'Комплексное решение для вашего бизнеса. Канал, боты, чаты, таргет в единую систему',
+                    price: 'от 12 000р',
+                    stages: ['✓ Аудит текущих процессов', '✓ Проектирование автоматической воронки', '✓ Настройка индивидуальной связки', '✓ Оптимизация конверсии'],
+                    result: 'Автоматизированная система, где каждый элемент работает на продажу',
+                    duration: 'от 3 до 7 недель',
+                    fullDesc: 'Полная воронка в Telegram: от привлечения до удержания клиентов. Интеграция всех инструментов мессенджера'
+                },
+                {
+                    id: 'ai',
+                    title: 'AI-ассистенты',
+                    desc: 'Интеллектуальный помощник, поможет в поддержке, консультациях',
+                    price: 'от 10 000р',
+                    stages: ['✓ Выбор AI модели', '✓ Обучение на ваших данных', '✓ Тестирование диалогов'],
+                    result: 'Персональный AI агент, обрабатывающий запросы клиентов 24/7',
+                    duration: 'от 2 до 7 дней',
+                    fullDesc: 'AI-ассистент, который отвечает на вопросы, консультирует и помогает клиентам, снижая нагрузку на команду'
+                },
+                {
+                    id: 'd3d',
+                    title: 'Бизнес под ключ',
+                    desc: 'Разработаем индивидуальный стиль для вашего бизнеса',
+                    price: 'от 20 000р',
+                    stages: ['✓ Создание уникального дизайна', '✓ Автоматизация бизнес процессов', '✓ Оформление в соц сетях' ],
+                    result: 'Уникальный визуальный контент, повышающий премиальность бренда',
+                    duration: 'от 4 дней до 2 недель',
+                    fullDesc: 'Выделим ваш бизнес с помощью уникальных инструментов продвижения'
+                }
+            ];
+
+            // Данные кейсов
+            const casesData = [
+                {
+                    title: 'Интернет-магазин премиум-бренда',
+                    task: 'Увеличить конверсию и автоматизировать приём заказов',
+                    solution: 'Разработан многостраничный сайт с AI-рекомендациями',
+                    result: 'Рост продаж в 3 раза за 4 месяца'
+                },
+                {
+                    title: 'Telegram-воронка для онлайн-школы',
+                    task: 'Автоматизировать запись на вебинары',
+                    solution: 'Создан бот с цепочкой касаний и интеграцией с CRM',
+                    result: 'Конверсия в покупку +45%'
+                }
+            ];
+
+            // Заполнение услуг на главной
+            const servicesGrid = document.getElementById('atom-services-grid');
+            servicesGrid.innerHTML = servicesData.map(service => `
+                <div class="atom-service-card atom-fade-up" data-service-id="${service.id}">
+                    <h3 class="atom-service-card__title">${service.title}</h3>
+                    <p class="atom-service-card__desc">${service.desc}</p>
+                    <div class="atom-service-card__price">${service.price}</div>
+                    <button class="atom-btn atom-service-card__btn" 
+                        data-service-id="${service.id}"
+                        data-title="${service.title}"
+                        data-stages='${JSON.stringify(service.stages)}'
+                        data-result="${service.result}"
+                        data-price="${service.price}"
+                        data-duration="${service.duration}"
+                        data-fulldesc="${service.fullDesc}">Подробнее</button>
+                </div>
+            `).join('');
+
+            // Заполнение кейсов
+            const casesGrid = document.getElementById('atom-cases-grid');
+            casesGrid.innerHTML = casesData.map(c => `
+                <div class="atom-case-card atom-fade-up">
+                    <div class="atom-case-card__img">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="0.5"><rect x="2" y="2" width="20" height="20" /></svg>
+                    </div>
+                    <div class="atom-case-card__content">
+                        <h3 class="atom-case-card__title">${c.title}</h3>
+                        <div class="atom-case-card__task"><strong>Задача:</strong> ${c.task}</div>
+                        <div class="atom-case-card__solution"><strong>Решение:</strong> ${c.solution}</div>
+                        <div class="atom-case-card__result"><strong>Результат:</strong> ${c.result}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Создание страниц услуг
+            const pagesContainer = document.getElementById('atom-pages-container');
+            servicesData.forEach(service => {
+                const pageDiv = document.createElement('div');
+                pageDiv.className = 'atom-page';
+                pageDiv.id = `atom-page-${service.id}`;
+                pageDiv.innerHTML = `
+                    <div class="atom-page-hero">
+                        <video class="atom-page-hero__video" autoplay loop muted playsinline>
+                            <source src="./video/video_s.mp4" type="video/mp4">
+                        </video>
+                        <div class="atom-page-hero__overlay"></div>
+                        <div class="atom-page-hero__content">
+                            <div class="atom-page-hero__nav">
+                                <a href="#" class="atom-page__back" data-close style="color: #fff; text-decoration: none; font-size: 16px; opacity: 0.8; transition: opacity 0.2s;">← Назад</a>
+                            </div>
+                            <h1 class="atom-page-hero__title">${service.title}</h1>
+                        </div>
+                    </div>
+                    
+                    <div class="atom-page__content">
+                        <div class="atom-container">
+                            <div class="atom-page__section">
+                                <h2 class="atom-page__section-title">Об услуге</h2>
+                                <p class="atom-page__text">${service.fullDesc}</p>
+                            </div>
+                            <div class="atom-page__section">
+                                <h2 class="atom-page__section-title">Этапы работы</h2>
+                                <ul class="atom-modal__stage-list">
+                                    ${service.stages.map(stage => `<li class="atom-modal__stage-item">${stage}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="atom-page__section">
+                                <h2 class="atom-page__section-title">Сроки</h2>
+                                <p class="atom-page__text">${service.duration}</p>
+                            </div>
+                            <div class="atom-page__section">
+                                <h2 class="atom-page__section-title">Результат</h2>
+                                <p class="atom-page__text">${service.result}</p>
+                            </div>
+                            <div class="atom-page__section">
+                                <h2 class="atom-page__section-title">Стоимость</h2>
+                                <p class="atom-page__price">${service.price}</p>
+                            </div>
+                            <button class="atom-btn" onclick="alert('Спасибо! Мы свяжемся с вами.');">Заказать</button>
+                        </div>
+                    </div>
+                `;
+                pagesContainer.appendChild(pageDiv);
+            });
+
+            // Переключение между главной и страницами услуг
+            const mainContent = document.getElementById('atom-main-content');
+            const pages = document.querySelectorAll('.atom-page');
+
+            function showMain() {
+                mainContent.classList.remove('atom-main-content--hidden');
+                pages.forEach(p => p.classList.remove('atom-page--active'));
+                window.location.hash = '#';
+                window.scrollTo(0, 0);
+            }
+
+            function showPage(serviceId) {
+                mainContent.classList.add('atom-main-content--hidden');
+                pages.forEach(p => p.classList.remove('atom-page--active'));
+                const page = document.getElementById(`atom-page-${serviceId}`);
+                if (page) page.classList.add('atom-page--active');
+                window.location.hash = `#${serviceId}`;
+                window.scrollTo(0, 0);
+            }
+
+            document.querySelectorAll('.atom-service-card__btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const serviceId = btn.getAttribute('data-service-id');
+                    showPage(serviceId);
+                });
+            });
+
+            document.querySelectorAll('.atom-page__back').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showMain();
+                });
+            });
+
+            // Восстановление состояния при загрузке страницы
+            function initFromHash() {
+                const hash = window.location.hash.substring(1);
+                if (hash) {
+                    const service = servicesData.find(s => s.id === hash);
+                    if (service) {
+                        showPage(service.id);
+                    }
+                }
+            }
+            initFromHash();
+
+            // Умная шапка: появляется при скролле вверх, скрывается при скролле вниз
+            let lastScrollTop = 0;
+            const header = document.getElementById('atom-header');
+            let ticking = false;
+
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        
+                        if (scrollTop > lastScrollTop && scrollTop > 100) {
+                            header.classList.add('atom-header--hidden');
+                        } else if (scrollTop < lastScrollTop) {
+                            header.classList.remove('atom-header--hidden');
+                        }
+                        
+                        if (scrollTop === 0) {
+                            header.classList.remove('atom-header--hidden');
+                        }
+                        
+                        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            // Анимация появления
+            const fadeElements = document.querySelectorAll('.atom-fade-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('atom-fade-up--visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            fadeElements.forEach(el => observer.observe(el));
+
+            // Закрытие бургер-меню при клике на ссылку
+            document.querySelectorAll('.atom-nav__link').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.getElementById('atom-burger').checked = false;
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
