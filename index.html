@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Атом ━ digital агентство</title>
-    <meta name=" description" content="Автоматизация, устранение хаоса, создание систем роста. Интернет-магазины, Telegram-решения, AI-ассистенты, 3D-дизайн.">
+    <title>Атом</title>
+    <meta name="description" content="Автоматизация, устранение хаоса, создание систем роста. Интернет-магазины, Telegram-решения, AI-ассистенты, 3D-дизайн.">
     <meta name="keywords" content="автоматизация бизнеса, создание интернет-магазинов, Telegram боты, AI ассистенты, 3D логотипы, воронки продаж">
- 
+    <!-- Preconnect и шрифт Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" href="ico/lofo-mini.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200;14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <style>
-        
+        /* ---------- СБРОС И БАЗОВЫЕ СТИЛИ ---------- */
         * {
             margin: 0;
             padding: 0;
@@ -409,10 +409,16 @@
             color: #555;
             font-size: 0.9rem;
             text-transform: uppercase;
+            overflow: hidden;
         }
-        .atom-case-card__img svg {
-            opacity: 0.3;
+        .atom-case-card__img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
         }
+       
+       
         .atom-case-card__content {
             padding: 25px;
         }
@@ -436,7 +442,7 @@
             .atom-cases__grid { grid-template-columns: 1fr; }
         }
 
-       
+        /* ---------- ОТЗЫВЫ С АВАТАРКАМИ ---------- */
         .atom-testimonials {
             margin-bottom: 140px;
         }
@@ -735,7 +741,7 @@
             border-bottom: 1px solid #222;
         }
 
-       
+        /* ---------- ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ ДЛЯ МАЛЕНЬКИХ ЭКРАНОВ ---------- */
         @media (max-width: 480px) {
             .atom-hero__title {
                 font-size: clamp(2.2rem, 10vw, 3rem);
@@ -797,6 +803,119 @@
         html, body {
             overflow-x: hidden;
         }
+        /* ---------- СТРАНИЦЫ КЕЙСОВ ---------- */
+        .atom-case-page {
+            display: none;
+            min-height: 100vh;
+            position: relative;
+            background: #000;
+        }
+        .atom-case-page--active {
+            display: block;
+        }
+
+        /* Фото в ряд */
+        .atom-case-photos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        .atom-case-photos img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+        /* Тень от низа к верху */
+        .atom-case-photos::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Описание для кого сайт */
+        .atom-case-description {
+            margin-bottom: 60px;
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: #ddd;
+        }
+
+        /* Цифры результатов */
+        .atom-case-stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .atom-case-stat {
+            text-align: center;
+        }
+        .atom-case-stat__number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .atom-case-stat__label {
+            font-size: 1.1rem;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Кнопки */
+        .atom-case-buttons {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+        }
+        .atom-case-buttons .atom-btn {
+            margin: 0;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .atom-case-photos {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .atom-case-photos img {
+                height: 250px;
+            }
+            .atom-case-stat__number {
+                font-size: 2.5rem;
+            }
+            .atom-case-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .atom-case-stats {
+                display: flex;
+                gap: 40px;
+                margin-bottom: 60px;
+                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+        }
     </style>
 </head>
 <body>
@@ -819,6 +938,7 @@
     </header>
 
     <main>
+        
         <!-- Главный контент -->
         <div class="atom-main-content" id="atom-main-content">
             <!-- Hero -->
@@ -862,6 +982,8 @@
 
         <!-- Страницы услуг будут вставлены сюда скриптом -->
         <div id="atom-pages-container"></div>
+        <!-- Страницы кейсов -->
+        <div id="atom-cases-pages-container"></div>
     </main>
 
     <!-- Подвал -->
@@ -869,10 +991,10 @@
         <div class="atom-container">
             <div class="atom-footer__logo"><img src="logo-Photoroom.png" alt="Атом"></div> 
             <div class="atom-footer__social">         
-                <a href="#" class="atom-footer__social-link" target="_blank" aria-label="Telegram">
+                <a href="https://t.me/m/8Fguph0YZjcy" class="atom-footer__social-link" target="_blank" aria-label="Telegram">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.2-.04-.28-.02-.12.02-2.08 1.32-2.94 1.87-.28.18-.78.43-1.12.42-.33-.01-1.08-.21-1.61-.38-.66-.21-1.18-.32-1.14-.68.02-.19.22-.38.61-.57 2.27-1 3.96-1.66 5.07-2.02 2.39-.78 2.89-.91 3.21-.91.22 0 .52.05.66.2.12.12.15.28.13.45z"/></svg>
                 </a>
-                <a href="#" class="atom-footer__social-link" target="_blank" aria-label="Instagram">
+                <a href="https://www.instagram.com/atom_marketingg?igsh=MXcwcnJtdzBua2JmbQ==" class="atom-footer__social-link" target="_blank" aria-label="Instagram">
                     <svg viewBox="0 0 24 24"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.509.5.902 1.105 1.153 1.772.248.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.217 1.79-.465 2.428a4.89 4.89 0 0 1-1.153 1.772c-.5.509-1.105.902-1.772 1.153-.637.248-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.217-2.428-.465a4.89 4.89 0 0 1-1.772-1.153c-.509-.5-.902-1.105-1.153-1.772-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.065.217-1.79.465-2.428a4.89 4.89 0 0 1 1.153-1.772c.5-.509 1.105-.902 1.772-1.153.637-.248 1.363-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 1 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
                 </a>
             </div>
@@ -887,32 +1009,35 @@
             // Данные услуг с ценами
             const servicesData = [
                 {
-                    id: 'd3d',
-                    title: 'Бизнес под ключ',
-                    desc: 'Разработаем индивидуальный стиль для вашего бизнеса',
-                    price: 'от 30 000р',
-                    stages: ['✓ Создание уникального дизайна', '✓ Автоматизация бизнес процессов', '✓ Оформление в соц сетях' ],
-                    result: 'Уникальный визуальный контент, повышающий премиальность бренда',
-                  
-                    fullDesc: 'Выделим ваш бизнес с помощью уникальных инструментов продвижения'
+                    id: 'shop',
+                    title: 'Сайты',
+                    desc: 'Многостраничные, одностраничные сайты и визитки с высокой конверсией',
+                    price: 'от 8 000р',
+                    stages: ['✓ Анализ ниши и конкурентов', '✓ Прототипирование и дизайн', '✓ Интеграция с CRM и платежными системами', '✓ Тестирование и запуск'],
+                    result: 'Вы получаете готовый сайт приносящий постоянный поток заявок, с постоянной поддержкой и SEO продвижением',
+                    duration: 'от 2 дней до 2 недель',
+                    fullDesc: 'Создадим и разработаем стильный премиальный сайт под ваш стиль. Используем проверенные решения для увеличения конверсии и автоматизации продаж'
+                },
+                
+                {
+                    id: 'bot',
+                    title: 'Видео AI',
+                    desc: 'Создаём продающие видео в разы быстрее и дешевле с помощью нейросетей',
+                    price: 'от 5 000р',
+                    stages: ['✓ Изучаем и анализируем аудиторию, подстраиваемся под современные тренды', '✓ Разработка сценария и контент-плана для нейросети', '✓ Создание видео - Генерируем визуал и звуковые эффекты'],
+                    result: 'Бот, который самостоятельно ведёт клиента от первого касания до покупки',
+                    duration: 'от 1 до 4 дней',
+                    fullDesc: 'Автоматизируйте продажи в Telegram с помощью ботов, которые квалифицируют лидов и отправляют целевые предложения.'
                 },
                 {
                     id: 'funnel',
                     title: 'Воронки продаж',
                     desc: 'Комплексное решение для вашего бизнеса. Канал, боты, чаты, таргет в единую систему',
-                    price: 'от 15 000р',
+                    price: 'от 12 000р',
                     stages: ['✓ Аудит текущих процессов', '✓ Проектирование автоматической воронки', '✓ Настройка индивидуальной связки', '✓ Оптимизация конверсии'],
                     result: 'Автоматизированная система, где каждый элемент работает на продажу',
-                   
+                    duration: 'от 3 до 7 недель',
                     fullDesc: 'Полная воронка в Telegram: от привлечения до удержания клиентов. Интеграция всех инструментов мессенджера'
-                },
-                 {
-                    id: 'bot',
-                    title: 'Ведение',
-                    desc: 'Составляем продающий контент план для набора подписчиков',
-                    price: 'от 15 000р',
-                    stages: ['✓ Изучаем и анализируем аудиторию, подстраиваемся под современные тренды', '✓ Разработка сценария и контент-плана', '✓ Создание видео - Генерируем визуал и звуковые эффекты'],
-                    result: 'Готовый контент план под ваш бизнес, с чек листом для каждого видео ролика. Профессиональный монтаж видео роликов',
                 },
                 {
                     id: 'ai',
@@ -921,32 +1046,58 @@
                     price: 'от 10 000р',
                     stages: ['✓ Выбор AI модели', '✓ Обучение на ваших данных', '✓ Тестирование диалогов'],
                     result: 'Персональный AI агент, обрабатывающий запросы клиентов 24/7',
-                    
+                    duration: 'от 2 до 7 дней',
                     fullDesc: 'AI-ассистент, который отвечает на вопросы, консультирует и помогает клиентам, снижая нагрузку на команду'
                 },
                 {
-                    id: 'shop',
-                    title: 'Сайты',
-                    desc: 'Многостраничные, одностраничные сайты и визитки с высокой конверсией',
-                    price: 'от 10 000р',
-                    stages: ['✓ Анализ ниши и конкурентов', '✓ Прототипирование и дизайн', '✓ Интеграция с CRM и платежными системами', '✓ Тестирование и запуск'],
-                    result: 'Вы получаете готовый сайт приносящий постоянный поток заявок, с постоянной поддержкой и SEO продвижением',
-                   
-                    fullDesc: 'Создадим и разработаем стильный премиальный сайт под ваш стиль. Используем проверенные решения для увеличения конверсии и автоматизации продаж'
+                    id: 'd3d',
+                    title: 'Бизнес под ключ',
+                    desc: 'Разработаем индивидуальный стиль для вашего бизнеса',
+                    price: 'от 20 000р',
+                    stages: ['✓ Создание уникального дизайна', '✓ Автоматизация бизнес процессов', '✓ Оформление в соц сетях' ],
+                    result: 'Уникальный визуальный контент, повышающий премиальность бренда',
+                    duration: 'от 4 дней до 2 недель',
+                    fullDesc: 'Выделим ваш бизнес с помощью уникальных инструментов продвижения'
                 }
             ];
 
             // Данные кейсов
             const casesData = [
                 {
+                    id: 'case1',
                     title: 'Интернет-магазин',
-                    solution: 'Разработан многостраничный сайт',
-                    result: 'Рост продаж в 3 раза за 4 месяца'
+                    forWhom: 'Для бренда дорогой одежды, который хотел увеличить онлайн-продажи и автоматизировать приём заказов.',
+                    description: 'Разработан многостраничный сайт, интегрированный с CRM и платежными системами. Внедрена система умных скидок и персонализированных предложений.',
+                    stats: [
+                        { number: '220 %', label: 'Рост продаж' },
+                        { number: '188', label: 'Заявок в месяц' },
+                        { number: '3.1x', label: 'ROI' }
+                    ],
+                    photos: [
+                        '../kart33.png',
+                        '../kart22.png',
+                        '../kart11.png'
+                    ],
+                    siteLink: 'https://atomaii.github.io/Shop/',
+                    discussLink: 'https://t.me/m/8Fguph0YZjcy'
                 },
                 {
-                    title: 'Atom воронка',
-                    solution: 'Бот с цепочкой касаний и конечным действием клиента',
-                    result: 'Конверсия в покупку +45%'
+                    id: 'case2',
+                    title: 'Telegram-воронка для онлайн-школы',
+                    forWhom: 'Для образовательной платформы, которая проводила вебинары и хотела автоматизировать запись и прогрев участников.',
+                    description: 'Создан бот с цепочкой касаний, интеграцией с CRM и автоматической отправкой материалов после регистрации. Воронка включала прогревающие сообщения, напоминания и пост-вебинарную рассылку.',
+                    stats: [
+                        { number: '+145%', label: 'Конверсия' },
+                        { number: '3 500', label: 'Участников' },
+                        { number: '2.3x', label: 'LTV' }
+                    ],
+                    photos: [
+                        '',
+                        '',
+                        ''
+                    ],
+                    siteLink: 'https://example.com/webinar',
+                    discussLink: 'https://t.me/ваш_ник'
                 }
             ];
 
@@ -968,21 +1119,23 @@
                 </div>
             `).join('');
 
-           
+            // Заполнение кейсов
             const casesGrid = document.getElementById('atom-cases-grid');
-            casesGrid.innerHTML = casesData.map(c => `
-                <div class="atom-case-card atom-fade-up">
+        casesGrid.innerHTML = casesData.map(c => `
+            <div class="atom-case-card atom-fade-up" data-case-id="${c.id}">
+                <div class="atom-case-card__img">
                     <div class="atom-case-card__img">
-                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="0.5"><rect x="2" y="2" width="20" height="20" /></svg>
-                    </div>
-                    <div class="atom-case-card__content">
-                        <h3 class="atom-case-card__title">${c.title}</h3>
-                        <div class="atom-case-card__task"><strong>Задача:</strong> ${c.task}</div>
-                        <div class="atom-case-card__solution"><strong>Решение:</strong> ${c.solution}</div>
-                        <div class="atom-case-card__result"><strong>Результат:</strong> ${c.result}</div>
+                        <img src="${c.photos[0]}" alt="${c.title}" style="width:100%; height:100%; object-fit:cover;">
                     </div>
                 </div>
-            `).join('');
+                <div class="atom-case-card__content">
+                    <h3 class="atom-case-card__title">${c.title}</h3>
+                    <div class="atom-case-card__task"><strong>Задача:</strong> ${c.task || 'Увеличить продажи и автоматизировать процессы'}</div>
+                    <div class="atom-case-card__solution"><strong>Решение:</strong> ${c.solution || 'Разработана индивидуальная стратегия'}</div>
+                    <div class="atom-case-card__result"><strong>Результат:</strong> ${c.result || 'Рост ключевых показателей'}</div>
+                </div>
+            </div>
+        `).join('');
 
             // Создание страниц услуг
             const pagesContainer = document.getElementById('atom-pages-container');
@@ -1035,34 +1188,109 @@
                 pagesContainer.appendChild(pageDiv);
             });
 
+            // Создание страниц кейсов
+            const casesPagesContainer = document.getElementById('atom-cases-pages-container');
+            casesData.forEach(c => {
+                const pageDiv = document.createElement('div');
+                pageDiv.className = 'atom-case-page';
+                pageDiv.id = `atom-case-page-${c.id}`;
+                
+                const photosHtml = c.photos.map(src => `<img src="${src}" alt="${c.title}">`).join('');
+                const statsHtml = c.stats.map(stat => `
+                    <div class="atom-case-stat">
+                        <div class="atom-case-stat__number">${stat.number}</div>
+                        <div class="atom-case-stat__label">${stat.label}</div>
+                    </div>
+                `).join('');
+
+                pageDiv.innerHTML = `
+                    <div class="atom-container" style="padding-top: 40px;">
+                        <div style="margin-bottom: 30px;">
+                            <a href="#" class="atom-case__back" data-case-close style="color: #fff; text-decoration: none; font-size: 16px; opacity: 0.8; transition: opacity 0.2s;">← Назад</a>
+                        </div>
+                        <h1 class="atom-page-hero__title" style="font-size: 3rem; margin-bottom: 40px;">${c.title}</h1>
+                        
+                        <div class="atom-case-photos">
+                            ${photosHtml}
+                        </div>
+                        
+                        <div class="atom-case-description">
+                            <p><strong></strong> ${c.forWhom}</p>
+                            <p style="margin-top: 20px;">${c.description}</p>
+                        </div>
+                        
+                        <div class="atom-case-stats">
+                            ${statsHtml}
+                        </div>
+                        
+                        <div class="atom-case-buttons">
+                            <a href="${c.siteLink}" class="atom-btn" target="_blank">Посетить сайт</a>
+                            <a href="${c.discussLink}" class="atom-btn" target="_blank">Обсудить проект</a>
+                        </div>
+                    </div>
+                `;
+                casesPagesContainer.appendChild(pageDiv);
+            });
+
+                        // Переключение между главной и страницами
             const mainContent = document.getElementById('atom-main-content');
-            const pages = document.querySelectorAll('.atom-page');
+            const servicePages = document.querySelectorAll('.atom-page');
+            const casePages = document.querySelectorAll('.atom-case-page');
+            const allPages = [...servicePages, ...casePages];
 
             function showMain() {
                 mainContent.classList.remove('atom-main-content--hidden');
-                pages.forEach(p => p.classList.remove('atom-page--active'));
+                allPages.forEach(p => p.classList.remove('atom-page--active', 'atom-case-page--active'));
                 window.location.hash = '#';
                 window.scrollTo(0, 0);
             }
 
-            function showPage(serviceId) {
+            function showServicePage(serviceId) {
                 mainContent.classList.add('atom-main-content--hidden');
-                pages.forEach(p => p.classList.remove('atom-page--active'));
+                allPages.forEach(p => p.classList.remove('atom-page--active', 'atom-case-page--active'));
                 const page = document.getElementById(`atom-page-${serviceId}`);
                 if (page) page.classList.add('atom-page--active');
                 window.location.hash = `#${serviceId}`;
                 window.scrollTo(0, 0);
             }
 
+            function showCasePage(caseId) {
+                mainContent.classList.add('atom-main-content--hidden');
+                allPages.forEach(p => p.classList.remove('atom-page--active', 'atom-case-page--active'));
+                const page = document.getElementById(`atom-case-page-${caseId}`);
+                if (page) page.classList.add('atom-case-page--active');
+                window.location.hash = `#case-${caseId}`;
+                window.scrollTo(0, 0);
+            }
+
+            // Клики по карточкам услуг
             document.querySelectorAll('.atom-service-card__btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
                     const serviceId = btn.getAttribute('data-service-id');
-                    showPage(serviceId);
+                    showServicePage(serviceId);
                 });
             });
 
+            // Клики по карточкам кейсов
+            document.querySelectorAll('.atom-case-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const caseId = card.getAttribute('data-case-id');
+                    showCasePage(caseId);
+                });
+            });
+
+            // Клики по кнопке "Назад" на страницах услуг
             document.querySelectorAll('.atom-page__back').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showMain();
+                });
+            });
+
+            // Клики по кнопке "Назад" на страницах кейсов
+            document.querySelectorAll('.atom-case__back').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     showMain();
@@ -1073,9 +1301,13 @@
             function initFromHash() {
                 const hash = window.location.hash.substring(1);
                 if (hash) {
-                    const service = servicesData.find(s => s.id === hash);
-                    if (service) {
-                        showPage(service.id);
+                    if (hash.startsWith('case-')) {
+                        const caseId = hash.replace('case-', '');
+                        const caseItem = casesData.find(c => c.id === caseId);
+                        if (caseItem) showCasePage(caseId);
+                    } else {
+                        const service = servicesData.find(s => s.id === hash);
+                        if (service) showServicePage(service.id);
                     }
                 }
             }
@@ -1128,11 +1360,4 @@
         })();
     </script>
 </body>
-
 </html>
-
-
-
-
-
-
